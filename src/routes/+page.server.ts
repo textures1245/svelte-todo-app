@@ -17,7 +17,7 @@ export function load({ cookies }): TodoDB {
 
 export const actions = {
 	create: async ({ cookies, request }) => {
-		await new Promise((fulfil) => setTimeout(1000, fulfil));
+		await new Promise((fulfil) => setTimeout(fulfil, 1000));
 
 		const data = await request.formData();
 		const priorityMapping: { [key: string]: 1 | 2 | 3 } = {
@@ -30,7 +30,7 @@ export const actions = {
 			description: data.get('description') as string,
 			dueDate: new Date(data.get('dueDate') as string),
 			priority: priorityMapping[data.get('priority') as '1' | '2' | '3'],
-			tags: [data.get('tags') as string],
+			tags: [data.get('tags ') as string],
 			done: false
 		};
 		try {
@@ -71,7 +71,7 @@ export const actions = {
 	},
 
 	complete: async ({ cookies, request }) => {
-		await new Promise((fulfil) => setTimeout(500, fulfil))
+		await new Promise((fulfil) => setTimeout(fulfil, 500));
 		const data = await request.formData();
 		const userId = cookies.get('userid') as string | undefined;
 		const todoId = data.get('id') as string | undefined;
@@ -83,7 +83,7 @@ export const actions = {
 	},
 
 	delete: async ({ cookies, request }) => {
-		await new Promise((fulfil) => setTimeout(1000, fulfil));
+		await new Promise((fulfil) => setTimeout(fulfil, 1000));
 		const data = await request.formData();
 		const userId = cookies.get('userid') as string | undefined;
 		const todoId = data.get('id') as string | undefined;
